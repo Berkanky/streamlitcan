@@ -24,7 +24,7 @@ if radiost=="GraphBar":
     fig=px.bar(dosya,x=columnst1,y=columnst2)
     st.plotly_chart(fig,use_container_width=True)
 if radiost=="GraphPie":
-    fig=px.pie(dosya,values=columnst2,names=columnst1)
+    fig=px.pie(dosya,values=columnst2,names=columnst1,height=700)
     st.plotly_chart(fig, use_container_width=True)
 st.write("Can Begen")
 st.write("86180008")
