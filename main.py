@@ -37,7 +37,6 @@ if graphst=="Pie Graph":
 st.plotly_chart(fig,use_container_width=True)
 st.write("Sag Taraftaki Legend Kısmından cift tıklayarak 1 veya 1'den fazla olcak sekilde spesifik secimler yapabilirsiniz")
 #st.dataframe(dosya)
-
 st.write("  ")
 st.write("  ")
 st.write("Can Begen")
