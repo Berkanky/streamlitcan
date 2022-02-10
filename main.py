@@ -3,29 +3,41 @@ import pandas as pd
 import plotly.express as px
 st.set_page_config(layout="wide")
 dosya=pd.read_csv("fortune.csv")
-st.title("Fortune 500")
+st.title("Dunyadaki En Degerli 500 Sirket")
 dosya=dosya.drop(columns=["hqstate","permalink"])
-yearst=st.number_input("Select Year",min_value=min(dosya["year"]),max_value=max(dosya["year"]),value=2021)
-if yearst:
+yearlist=list(dosya["year"].unique())
+yearlist.insert(0,"All Years")
+yearst=st.selectbox("Yıl Sec",yearlist)
+st.write("Burdan Yılları Seçerek Datayı Filtreleyebilirsiniz")
+if yearst!="All Years":
     dosya=dosya[dosya["year"]==yearst]
 st.dataframe(dosya)
-columns1=["sector","industry"]
-columns2=["revenues","revchange","profits","prftchange","assets","employees"]
+
 col1,col2=st.columns(2)
 with col1:
-    columnst1=st.selectbox("Select Column",columns1,index=columns1.index("sector"))
-dosya=dosya.set_index(columnst1)
+    columns3=["sector","industry"]
+    columnst3=st.selectbox("X Degerini Sec",columns3)
+    st.write("Burdan Asagidaki Grafik icin X Degerini secebilirsiniz")
 with col2:
-    columnst2=st.selectbox("Select Second Column",columns2,index=columns2.index("revenues"))
+    columns4 = ["revenues", "revchange", "profits", "prftchange", "assets", "employees"]
+    columnst4=st.selectbox("Y Degerini Sec",columns4)
+    st.write("Burdan Asagidaki Grafik icin Y Degerini Secebilirsiniz")
+dosya=dosya[[columnst3,columnst4]]
+dosya=dosya.groupby(columnst3)[columnst4].mean()
 dosya=dosya.reset_index()
-dosya=dosya[[columnst1,columnst2]]
-radiost=st.radio("Select Graph",["GraphBar","GraphPie"])
-if radiost=="GraphBar":
-    fig=px.bar(dosya,x=columnst1,y=columnst2)
-    st.plotly_chart(fig,use_container_width=True)
-if radiost=="GraphPie":
-    fig=px.pie(dosya,values=columnst2,names=columnst1,height=700)
-    st.plotly_chart(fig, use_container_width=True)
+dosya=dosya.sort_values(by=[columnst4],ascending=False)
+graphslist=["Bar Graph","Pie Graph"]
+defaultx=graphslist.index("Pie Graph")
+graphst=st.selectbox("Grafik Tipini Sec",graphslist,index=defaultx)
+st.write("Grafik Tipini Secebilirsiniz")
+if graphst=="Bar Graph":
+    fig=px.bar(dosya,x=columnst3,y=columnst4,title=columnst3,height=800)
+if graphst=="Pie Graph":
+    fig=px.pie(dosya,values=columnst4,names=columnst3,title=columnst3,height=700)
+st.plotly_chart(fig,use_container_width=True)
+#st.dataframe(dosya)
+
+
 st.write("Can Begen")
 st.write("86180008")
 st.write("Bilgi Görsellestirmesi")
