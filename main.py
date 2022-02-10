@@ -34,8 +34,8 @@ if graphst=="Bar Graph":
     fig=px.bar(dosya,x=columnst3,y=columnst4,title=columnst3,height=800)
 if graphst=="Pie Graph":
     fig=px.pie(dosya,values=columnst4,names=columnst3,title=columnst3,height=700)
-    st.write("Sag Taraftaki Legend Kısmından cift tıklayarak 1 veya 1'den fazla olcak sekilde spesifik secimler yapabilirsiniz")
 st.plotly_chart(fig,use_container_width=True)
+st.write("Sag Taraftaki Legend Kısmından cift tıklayarak 1 veya 1'den fazla olcak sekilde spesifik secimler yapabilirsiniz")
 #st.dataframe(dosya)
 
 
