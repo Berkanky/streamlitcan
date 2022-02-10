@@ -20,7 +20,8 @@ with col1:
     st.write("Burdan Asagidaki Grafik icin X Degerini secebilirsiniz")
 with col2:
     columns4 = ["revenues", "revchange", "profits", "prftchange", "assets", "employees"]
-    columnst4=st.selectbox("Y Degerini Sec",columns4)
+    defaultx2=columns4.index("profits")
+    columnst4=st.selectbox("Y Degerini Sec",columns4,index=defaultx2)
     st.write("Burdan Asagidaki Grafik icin Y Degerini Secebilirsiniz")
 dosya=dosya[[columnst3,columnst4]]
 dosya=dosya.groupby(columnst3)[columnst4].mean()
