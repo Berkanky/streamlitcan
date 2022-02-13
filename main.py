@@ -4,6 +4,7 @@ import plotly.express as px
 st.set_page_config(layout="wide")
 dosya=pd.read_csv("fortune.csv")
 st.title("Dunyadaki En Degerli 500 Sirket")
+st.write("Dunya genelindeki 500 sirket, sektor ve endustrinin veri gorsellestirmesi asagıdaki grafikler de gosterilmiştir")
 dosya=dosya.drop(columns=["hqstate","permalink"])
 yearlist=list(dosya["year"].unique())
 yearlist.insert(0,"All Years")
